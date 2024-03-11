@@ -9,11 +9,13 @@ create table teachers(
 	id int auto_increment not null primary key,
     name_teacher varchar(45) not null,
     post varchar(45) not null);
-create table courses(
+create table courses{
 	id int auto_increment not null primary key,
     name_courses varchar(45) not null,
     id_student int not null,
-    id_teacher int not null);
+    id_teacher int not null,
+    foreign key (id_student) references students (id),
+    foreign key (id_teacher) references teachers (id)};
 INSERT INTO students (name_student, email, phone)
 VALUES 
 ('Миша', 'misha@mail.ru', 9876543221),
@@ -41,6 +43,10 @@ VALUES
 (400, 'Anton', 'Marketing', 9500),
 (500, 'Dima', 'IT', 6000),
 (501, 'Maxs', 'Accounting', 6543);
+alter table courses 
+add foreign key (id_student) references students (id);
+alter table courses
+add foreign key (id_teacher) references teachers (id);
 SELECT name_worker, salary FROM workers WHERE salary > 6000;
 SELECT name_worker, dept
 FROM workers
